@@ -20,4 +20,3 @@ showChannelInfo(await getChannels());
 someClickEvents();
 
 // ============= Update
-updateChannels()

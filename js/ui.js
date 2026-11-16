@@ -1,3 +1,4 @@
+import { updateFavorite } from "./update.js";
 
 
 const chansContainer = document.querySelector("#channels");
@@ -101,13 +102,17 @@ function someClickEvents(){
             let favIcon = e.target.closest(".fav-icon");
 
             // console.log(favIcon)
+                // let tr = 
+            const id = e.target.closest("tr").dataset.id
             if(favIcon.isfavorite == "true"){
                 favIcon.innerHTML = `<i class="far fa-star not-favorite cursor-pointer"></i>`
                 favIcon.isfavorite = "false"
+                updateFavorite(id, false)
                     
             }else{
                 favIcon.innerHTML = `<i class="fas fa-star favorite cursor-pointer"></i>`
                 favIcon.isfavorite = "true"
+                updateFavorite(id, true)
                 
             }
         }
