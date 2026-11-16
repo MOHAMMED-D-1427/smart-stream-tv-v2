@@ -1,4 +1,4 @@
-import { getChannels } from "../services/api.js";
+import { getChannels, updateChannels } from "../services/api.js";
 import { filterChannels } from "./filter.js";
 import { searchChannels } from "./search.js";
 import { showChannelInfo, showChannels, someClickEvents } from "./ui.js";
@@ -18,3 +18,5 @@ filterChannels();
 showChannelInfo(await getChannels());
 
 someClickEvents();
+
+// ============= Update

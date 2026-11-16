@@ -1,3 +1,5 @@
+import { updateFavorite } from "./update.js";
+
 
 const chansContainer = document.querySelector("#channels");
 
@@ -12,7 +14,16 @@ function showChannels(data){
     chansContainer.innerHTML = ""
     chansContainer.innerHTML = data.map(ch => `
         <tr class="channel border-b border-gray-900 px-1 chan-hover" data-id="${ch.id}">
-            <td>&nbsp; ${ch.channelNumber}</td><td><img src="${ch.logo}" alt="Channel Logo" class="w-12.75"></td><td>${ch.name}</td>
+            <td>&nbsp; ${ch.channelNumber}</td><td><img src="${ch.logo}" alt="Channel Logo" class="w-12.75"></td>
+            <td class="h-12.75 flex justify-between items-center">${ch.name}
+                <span class="w-12.5 flex justify-around items-center text-[17px]">
+                    <i class="fa-solid fa-ban hover:text-red-400"></i>
+                        <span data-isfavorite="${ch.isFavorite}" class="fav-icon">
+                            <i class="${ch.isFavorite ? "fas" : "far"} fa-star ${ch.isFavorite ? "favorite" : "not-favorite"} cursor-pointer"></i>
+                        </span>
+                        
+                    </span>
+            </td>
         </tr>
     `).join("");
 
@@ -61,31 +72,57 @@ function showChannelInfo(data){
     });
 }
 
+// ================================
 const sideBar = document.querySelector("#side-bar");
-
 
 function someClickEvents(){
     
     document.addEventListener("click", (e)=>{
-        
+        // console.log(notFavorite)
+        // console.log(favorite)
+        // --------------------------------- Reload
         if(e.target.classList.contains("fa-rotate-right")) location.reload();
-        // const reload = document.querySelector(".fa-rotate-right")
         
+        // --------------------------------- Active Channel
         if(e.target.closest(".channel")){
             const channels = document.querySelectorAll(".channel");
-            
             for(let ch of channels){
                 ch.classList.remove("active")
-                
             }
             e.target.closest(".channel").classList.add("active")
         }
-
+        // --------------------------------- Hide/Show
         if(e.target.closest("#side-bar-btn")){
             sideBar.classList.toggle("-left-[100%]")
             sideBar.classList.toggle("left-0")
             console.log("GH")
         }
+        // ------------------------------------------------ Color Star Icon
+        if(e.target.closest(".fa-star")){
+            let favIcon = e.target.closest(".fav-icon");
+
+            // console.log(favIcon)
+                // let tr = 
+            const id = e.target.closest("tr").dataset.id
+            if(favIcon.isfavorite == "true"){
+                favIcon.innerHTML = `<i class="far fa-star not-favorite cursor-pointer"></i>`
+                favIcon.isfavorite = "false"
+                updateFavorite(id, false)
+                    
+            }else{
+                favIcon.innerHTML = `<i class="fas fa-star favorite cursor-pointer"></i>`
+                favIcon.isfavorite = "true"
+                updateFavorite(id, true)
+                
+            }
+        }
+        // ------------------------------------------------ Blacklist a channel
+        if(e.target.closest(".fa-ban")){
+            const tr = e.target.closest("tr")
+            const id = tr.dataset.id;
+            tr.remove()
+        }
+
     })
 }
 

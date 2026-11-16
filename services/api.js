@@ -1,5 +1,7 @@
 import { showChannels } from "../js/ui.js";
 
+const URL = "https://6af5eb63f6270fa08d68de84.mockapi.io/api/channels"
+
 let channels = null
 
 const errMsg = document.getElementById("http-error")
@@ -12,7 +14,7 @@ async function getChannels(){
     try{
         loading.classList.remove("hidden")
         loading.classList.add("flex")
-        const res = await fetch("https://6af5eb63f6270fa08d68de84.mockapi.io/api/channels");
+        const res = await fetch(URL);
         // const res = await fetch("../data/channels.json");
 
         if(res.status >= 500){
@@ -59,6 +61,23 @@ async function getChannels(){
     }
 }
 
-export {getChannels};
+// ============================================ Update 
+
+
+async function updateChannels(){
+    const res = await fetch(URL);
+    const data = await res.json()
+    for(let ch of data){
+        await fetch(`${URL}/${ch.id}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({isFavorite: false, isBlacklisted: false})
+        });
+    }
+    console.log("Updated")
+}
+
+
+export {getChannels, updateChannels};
 
 

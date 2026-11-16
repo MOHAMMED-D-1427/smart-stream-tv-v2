@@ -18,3 +18,17 @@
         /* bg-linear-to-r from-15%-black to-primary */
     background: linear-gradient(45deg, black 34%, #2d00cf)
 }
+
+@utility not-favorite{
+    &:hover{
+        color: #ffff00bd;
+    }
+}
+/* .not-favorite:hover{ */
+/* } */
+@utility favorite{
+    color: #ffff00bd;
+    &:hover{
+        color: #ffffbbbd;
+    }
+} 
