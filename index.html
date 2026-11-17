@@ -47,18 +47,24 @@
                         
                     </div>
                     <!-- ==================== Filter -->
-                    
-                    <select class="w-full mb-3 p-1.5 rounded bg-black text-white outline-none" id="categories">
-                        <option value="">All categories</option>
-                        <option value="DOCUMENTARY">DOCUMENTARY</option>
-                        <option value="RELIGION">RELIGION</option>
-                        <option value="NEWS">NEWS</option>
-                        <option value="CULTURE">CULTURE</option>
-                        <option value="KIDS">KIDS</option>
-                        <option value="ENTERTAINMENT">ENTERTAINMENT</option>
-                        <option value="CINEMA">CINEMA</option>
-                        <option value="SPORT">SPORT</option>
-                    </select>
+                    <div class="flex items-baseline justify-between">
+                        <select class="w-fit mb-3 p-1.5 rounded bg-black text-white outline-none" id="categories">
+                            <option value="">All categories</option>
+                            <option value="DOCUMENTARY">DOCUMENTARY</option>
+                            <option value="RELIGION">RELIGION</option>
+                            <option value="NEWS">NEWS</option>
+                            <option value="CULTURE">CULTURE</option>
+                            <option value="KIDS">KIDS</option>
+                            <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                            <option value="CINEMA">CINEMA</option>
+                            <option value="SPORT">SPORT</option>
+                        </select>
+                        <!-- ----------------------- -->
+                         <div class="font-bold">
+                            <span id="favorites" class="px-2 py-1 border-2 rounded border-primary bg-[#2d00cf36] hover:bg-[#eeeeee21] cursor-pointer">Favorites <i class="fas fa-star text-yellow-600"></i></span>
+                            <span id="blacklist" class="px-2 py-1 border-2 rounded border-primary bg-[#2d00cf36] hover:bg-[#eeeeee21] cursor-pointer">Black list <i class="fa-solid fa-ban text-red-400"></i></span>
+                         </div>
+                    </div>
                 </div>
                 
                 <table class="w-full border border-gray-900 " >

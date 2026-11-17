@@ -8,7 +8,17 @@ async function updateFavorite(id, value){
         body: JSON.stringify({isFavorite: value})
     });
 
-    console.log("Updated")
+    console.log("Updated");
 }
 
-export {updateFavorite}
+async function updateBlacklist(id, value){
+    await fetch(`${URL}/${id}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({isBlacklisted: value})
+    });
+
+    console.log("Updated");
+}
+
+export {updateFavorite, updateBlacklist}

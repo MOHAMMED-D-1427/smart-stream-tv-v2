@@ -1,4 +1,4 @@
-import { updateFavorite } from "./update.js";
+import { updateBlacklist, updateFavorite } from "./update.js";
 
 
 const chansContainer = document.querySelector("#channels");
@@ -12,8 +12,8 @@ function showChannels(data){
     }
 
     chansContainer.innerHTML = ""
-    chansContainer.innerHTML = data.map(ch => `
-        <tr class="channel border-b border-gray-900 px-1 chan-hover" data-id="${ch.id}">
+    chansContainer.innerHTML = data.map(ch =>`
+        <tr data-id="${ch.id}" data-isfavorite=${ch.isFavorite} data-isblacklisted=${ch.isBlacklisted} class="channel ${ch.isBlacklisted ? "hidden" : ""} border-b border-gray-900 px-1 chan-hover" >
             <td>&nbsp; ${ch.channelNumber}</td><td><img src="${ch.logo}" alt="Channel Logo" class="w-12.75"></td>
             <td class="h-12.75 flex justify-between items-center">${ch.name}
                 <span class="w-12.5 flex justify-around items-center text-[17px]">
@@ -60,8 +60,7 @@ function showChannelInfo(data){
             program.textContent = filtered.epg.currentProgram;
             starts.textContent = filtered.epg.startTime;
             ends.textContent = filtered.epg.endTime;
-            // player.style.backgroundImage = `url(${filtered.logo})`
-            // console.log(player)
+   
             video.classList.remove("hidden");
             video.src = filtered.streamUrl;
             emptyPlayer.classList.add("hidden")
@@ -112,19 +111,33 @@ function someClickEvents(){
             }else{
                 favIcon.innerHTML = `<i class="fas fa-star favorite cursor-pointer"></i>`
                 favIcon.isfavorite = "true"
-                updateFavorite(id, true)
+                updateFavorite(id, true);
                 
             }
         }
         // ------------------------------------------------ Blacklist a channel
         if(e.target.closest(".fa-ban")){
-            const tr = e.target.closest("tr")
+            const tr = e.target.closest("tr");
             const id = tr.dataset.id;
-            tr.remove()
+            // tr.remove();
+            updateBlacklist(id, true);
         }
+
+        // ----------------------------------- Show Favorites
+        showFavirote(e)
 
     })
 }
 
+
+function showFavirote(event){
+    if(!event.target.closest("#favorites")) return;
+    const channels = document.querySelectorAll(".channel")
+    for(let ch of channels){
+        if(ch.dataset.isfavorite == "false"){
+            ch.classList.add("hidden");
+        }
+    }
+}
 
 export {showChannels, showChannelInfo, someClickEvents}

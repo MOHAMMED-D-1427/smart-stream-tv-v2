@@ -21,13 +21,13 @@
 
 @utility not-favorite{
     &:hover{
-        color: #ffff00bd;
+        color: #d08700;
     }
 }
 /* .not-favorite:hover{ */
 /* } */
 @utility favorite{
-    color: #ffff00bd;
+    color: #d08700;
     &:hover{
         color: #ffffbbbd;
     }
