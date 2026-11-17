@@ -12,6 +12,7 @@
     --color-red-700: oklch(50.5% 0.213 27.518);
     --color-yellow-200: oklch(94.5% 0.129 101.54);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-yellow-600: oklch(68.1% 0.162 75.834);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-700: oklch(37.3% 0.034 259.733);
@@ -287,6 +288,9 @@
   .w-125 {
     width: calc(var(--spacing) * 125);
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
   }
@@ -308,6 +312,9 @@
   .scrollbar-thumb-primary {
     --tw-scrollbar-thumb: var(--color-primary);
     scrollbar-color: var(--tw-scrollbar-thumb) var(--tw-scrollbar-track);
+  }
+  .items-baseline {
+    align-items: baseline;
   }
   .items-center {
     align-items: center;
@@ -360,6 +367,9 @@
   }
   .border-secondary {
     border-color: var(--color-secondary);
+  }
+  .bg-\[\#2d00cf36\] {
+    background-color: #2d00cf36;
   }
   .bg-\[\#3700ff24\] {
     background-color: #3700ff24;
@@ -434,13 +444,13 @@
     font-weight: var(--font-weight-bold);
   }
   .favorite {
-    color: #ffff00bd;
+    color: #d08700;
     &:hover {
       color: #ffffbbbd;
     }
   }
   .not-favorite:hover {
-    color: #ffff00bd;
+    color: #d08700;
   }
   .text-\[\#ff0000f5\] {
     color: #ff0000f5;
@@ -457,6 +467,9 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
+  .text-red-400 {
+    color: var(--color-red-400);
+  }
   .text-secondary {
     color: var(--color-secondary);
   }
@@ -465,6 +478,9 @@
   }
   .text-yellow-500 {
     color: var(--color-yellow-500);
+  }
+  .text-yellow-600 {
+    color: var(--color-yellow-600);
   }
   .filter {
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
@@ -487,6 +503,9 @@
     background: linear-gradient(45deg, black 34%, #2d00cf);
   }
   @media (hover: hover) {
+    .hover\:bg-\[\#eeeeee21\]:hover {
+      background-color: #eeeeee21;
+    }
     .hover\:bg-primary:hover {
       background-color: var(--color-primary);
     }
