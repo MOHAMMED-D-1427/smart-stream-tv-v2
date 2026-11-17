@@ -17,7 +17,7 @@ function showChannels(data){
             <td>&nbsp; ${ch.channelNumber}</td><td><img src="${ch.logo}" alt="Channel Logo" class="w-12.75"></td>
             <td class="h-12.75 flex justify-between items-center">${ch.name}
                 <span class="w-12.5 flex justify-around items-center text-[17px]">
-                    <i class="fa-solid fa-ban hover:text-red-400"></i>
+                    <i class="fa-solid fa-ban ${ch.isBlacklisted ? "text-red-400" : ""} hover:text-red-400"></i>
                         <span data-isfavorite=${ch.isFavorite} class="fav-icon">
                             <i class="${ch.isFavorite ? "fas" : "far"} fa-star ${ch.isFavorite ? "favorite" : "not-favorite"} cursor-pointer"></i>
                         </span>
@@ -96,70 +96,113 @@ function someClickEvents(){
             sideBar.classList.toggle("left-0")
             console.log("GH")
         }
-        // ------------------------------------------------ Color Star Icon
+        // ------------------------------------------------ Favorite a channel
         if(e.target.closest(".fa-star")){
             let favIcon = e.target.closest(".fav-icon");
-            let tr = e.target.closest("tr").dataset
-
-  
+            let tr = e.target.closest("tr");
+            
+            // console.log(e.target.closest("tr"))
             const id = e.target.closest("tr").dataset.id
-            console.log("==> favIcon: ",favIcon.dataset.isfavorite)
-            console.log("==> favIcon ele: ",favIcon)
 
             if(favIcon.dataset.isfavorite == "true"){
                 favIcon.innerHTML = `<i class="far fa-star not-favorite cursor-pointer"></i>`
-                favIcon.dataset.isfavorite = "false"
-                updateFavorite(id, false)
-                console.log("==> Not-Fav: ",favIcon.isfavorite)
-                console.log(favIcon.innerHTML)
+                favIcon.dataset.isfavorite = "false";
+                tr.dataset.isfavorite = "false"
+                updateFavorite(id, false);
+                
                     
             }else{
                 favIcon.innerHTML = `<i class="fas fa-star favorite cursor-pointer"></i>`
                 favIcon.dataset.isfavorite = "true"
-                // tr.isfavorite = true
-                updateFavorite(id, true);
-                console.log("==> Fav: ",favIcon.isfavorite)
-                console.log(favIcon.innerHTML)
+                tr.dataset.isfavorite = "true"
                 
+                updateFavorite(id, true);
+                // console.log(tr)
+                // ====================> If its also black listed
+                // console.log(e.target.closest("tr").querySelector(".fav-icon"));
+
+                tr.querySelector(".fa-ban").classList.remove("text-red-400");
+                tr.classList.remove("blacklist");
+                updateBlacklist(id, false);
+                // blacklist()
+
+                console.log(tr);
             }
         }
         // ------------------------------------------------ Blacklist a channel
         if(e.target.closest(".fa-ban")){
             const tr = e.target.closest("tr");
             const id = tr.dataset.id;
-            showBlacklist(e)
-            // tr.remove();
-            updateBlacklist(id, true);
+            let favIcon = e.target.closest("tr").querySelector(".fav-icon");
+
+            // console.log(e.target.closest(".channel"));
+
+            if(!tr.closest(".blacklist")){
+                updateBlacklist(id, true);
+                tr.classList.add("hidden",  "blacklist");
+                tr.querySelector(".fa-ban").classList.add("text-red-400");
+                // ====================> If its also favorite
+                favIcon.innerHTML = `<i class="far fa-star not-favorite cursor-pointer"></i>`
+                console.log(e.target.closest("tr").querySelector(".fav-icon"));
+                e.target.closest("tr").querySelector(".fav-icon").dataset.isfavorite = "false";
+                // console.log(e.target.closest("tr").querySelector(".fav-icon"));
+                updateFavorite(id, false);
+
+
+            }else{
+                // console.log("==> back from B", tr.closest(".blacklist"))
+                updateBlacklist(id, false);
+                tr.classList.remove("blacklist");
+                tr.classList.add("hidden");
+            }
         }
 
         // ----------------------------------- Show Favorites
         showFavirote(e)
+        // ---------------------------------- Show Blacklist
+        showBlacklist(e)
 
     })
 }
 
 
-
+function favorites(){
+    const channels = document.querySelectorAll(".channel")
+    for(let ch of channels){
+        if(ch.dataset.isfavorite == "false" || ch.closest(".blacklist")){
+            ch.classList.add("hidden");
+        }else{
+            ch.classList.remove("hidden");
+        }
+    }
+}
 function showFavirote(event){
     if(!event.target.closest("#favorites")) return;
     const channels = document.querySelectorAll(".channel")
     for(let ch of channels){
-        if(ch.dataset.isfavorite == "false"){
-            
+        if(ch.dataset.isfavorite == "false" || ch.closest(".blacklist")){
             ch.classList.add("hidden");
+        }else{
+            ch.classList.remove("hidden");
+        }
+    }
+}
+
+function blacklist(){
+    const channels = document.querySelectorAll(".channel")
+    for(let ch of channels){
+        if(!ch.closest(".blacklist")){
+            ch.classList.add("hidden");
+
+        }else{
+            ch.classList.remove("hidden");
         }
     }
 }
 function showBlacklist(event){
-    // if(!event.target.closest("#blacklist")) return;
+    if(!event.target.closest("#blacklist")) return;
     // console.log("Black")
-    // const channels = document.querySelectorAll(".blacklist")
-    // for(let ch of channels){
-    //     // if(ch.dataset.isfavorite == "false"){
-    //         ch.classList.add("hidden");
-    //     // }
-    // }
-    // console.log(channels)
+    blacklist();
 }
 
 export {showChannels, showChannelInfo, someClickEvents}
