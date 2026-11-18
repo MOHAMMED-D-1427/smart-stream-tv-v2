@@ -32,3 +32,7 @@
         color: #ffffbbbd;
     }
 } 
+
+@utility box-shadow{
+    box-shadow: 0 0 7px 1px #3200e7;
+}
