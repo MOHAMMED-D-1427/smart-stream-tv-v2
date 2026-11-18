@@ -1,4 +1,5 @@
 import { getChannels, updateChannels } from "../services/api.js";
+import { deleteChannel } from "./delete.js";
 import { filterChannels } from "./filter.js";
 import { searchChannels } from "./search.js";
 import { showChannelInfo, showChannels, someClickEvents } from "./ui.js";
@@ -19,4 +20,6 @@ showChannelInfo(await getChannels());
 
 someClickEvents();
 
-// ============= Update
+// ============= delete
+
+deleteChannel()

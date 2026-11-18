@@ -30,11 +30,18 @@
 
 
     <main class="my-10 mt-30">
+
+        <div id="confirm-popup" class="invisible fixed top-0 z-12 h-full w-full bg-[#00000046] flex justify-center items-center">    
+            <div class="box-shadow h-32.75 w-67.5 flex flex-col items-center justify-between bg-black p-3 rounded">
+                <p class="font-bold text-center"><i class=" fas fa-exclamation-triangle"></i>Delete this channel <br><span class="ch-name underline font-bold"></span>?</p>
+                <div class="flex gap-2 justify-evenly w-full">
+                    <button id="confirm" class="border-2 border-red-800 rounded px-2 py-1 font-bold cursor-pointer hover:scale-110">Confirm</button>
+                    <button id="cancel" class="bg-primary border-0 rounded px-2 py-1 font-bold cursor-pointer hover:scale-110">Cancel</button>
+                </div>
+            </div>
+        </div>
         
         <!-- ==================== Channels & TV Player -->
-         <!-- max-[920px]:flex-col-reverse -->
-          <!--     width: 440px;
-    box-shadow: 0 0 9px #343434; -->
          <div class="flex justify-center gap-5 ">
 
                 <div id="side-bar"  class="text-sm bg-gray-950 w-125 px-4 pb-7 fixed left-0 top-25 rounded h-screen overflow-y-scroll scrollbar-thumb-primary scrollbar-thin transition-all">
@@ -80,10 +87,6 @@
             </div>
                
             <!-- =================================== Channel Info ================ -->
-                 <!-- display: flex; -->
-    <!-- justify-content: space-between; -->
-    <!-- width: stretch; -->
-    <!-- margin: 0 3%; -->
             <div class="bg-gray-950 px-4 py-7 rounded w-112.5 h-fit  ">
                 <div>
 
