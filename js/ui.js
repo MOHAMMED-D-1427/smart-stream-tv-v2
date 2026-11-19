@@ -173,10 +173,10 @@ function showFavirote(event){
     if(!event.target.closest("#favorites")) return;
     const channels = document.querySelectorAll(".channel")
     for(let ch of channels){
-        if(ch.dataset.isfavorite == "false" || ch.closest(".blacklist")){
-            ch.classList.add("hidden");
-        }else{
+        if(ch.dataset.isfavorite == "true"){
             ch.classList.remove("hidden");
+        }else{
+            ch.classList.add("hidden");
         }
     }
 }
