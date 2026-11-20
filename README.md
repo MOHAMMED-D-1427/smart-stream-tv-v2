@@ -1,17 +1,22 @@
-# Smart Stream TV
+# Smart Stream TV V2
 
-A web app to browse and watch TV channels, with search and filters options.
+This is a second version of Smart Stream TV web app to browse and watch TV channels with other features.
 
-🔗 **Live demo:** https://mohammed-d-1427.github.io/smart-stream-tv-youcode
+🔗 **Live demo:** https://mohammed-d-1427.github.io/smart-stream-tv-v2
 
 
 
 ## About
 
-This project was an assignment of a Sprint from YouCode school, and it was a very good idea to desplay and whatch TV channels in a web app.
+This project was an assignment of a Sprint in YouCode school, and it was a very good idea to desplay and whatch TV channels in a web app, and this is the second version
 
 ## Features
 
+- Move channels to favorites.
+- Move channels to blacklist.
+- Show the last 5 watched channels.
+- Create a new channel and add it to MockAPI.
+- Delete a channel from MockAPI.
 - Channel list loaded from MockAPI
 - Search by channel name/channel number
 - Filters by category
@@ -31,7 +36,7 @@ This project was an assignment of a Sprint from YouCode school, and it was a ver
 ### Installation
 
 ```bash
-git clone https://github.com/MOHAMMED-D-1427/smart-stream-tv-youcode.git
+git clone https://github.com/MOHAMMED-D-1427/smart-stream-tv-v2.git
 cd REPO-NAME
 npm install
 npm run build
@@ -52,6 +57,9 @@ Then open `index.html` in your browser (or use a local server such as the VS Cod
 │   ├── filter.js        # Filtering logic
 │   ├── search.js        # Search logic
 │   └── ui.js            # UI rendering
+│   └── add.js           
+│   └── update.js           
+│   └── delete.js            
 ├── services/
 │   └── api.js           # Data fetching
 ├── index.html
