@@ -15,7 +15,6 @@
 }
 
 @utility active{
-        /* bg-linear-to-r from-15%-black to-primary */
     background: linear-gradient(45deg, black 34%, #2d00cf)
 }
 
@@ -34,5 +33,5 @@
 } 
 
 @utility box-shadow{
-    box-shadow: 0 0 7px 1px #3200e7;
+    box-shadow: 0 0 5px var(--color-primary);
 }

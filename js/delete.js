@@ -4,13 +4,14 @@ const $ = query => document.querySelector(query)
 const popup = $("#confirm-popup")
 
 function deleteChannel(){
-    let id = null;
     let channel = null
+    let id = null;
     document.addEventListener("contextmenu", (e)=>{
         if(!e.target.closest(".fa-ban")) return ;
         e.preventDefault()
 
         id = e.target.closest("tr").dataset.id;
+        console.log(id)
         channel = e.target.closest("tr");
         const chName = e.target.closest("tr td").textContent
         $(".ch-name").textContent = chName
