@@ -301,11 +301,20 @@
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
+  .w-108 {
+    width: calc(var(--spacing) * 108);
+  }
+  .w-110 {
+    width: calc(var(--spacing) * 110);
+  }
   .w-110\.75 {
     width: calc(var(--spacing) * 110.75);
   }
   .w-112\.5 {
     width: calc(var(--spacing) * 112.5);
+  }
+  .w-125 {
+    width: calc(var(--spacing) * 125);
   }
   .w-fit {
     width: fit-content;
