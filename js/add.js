@@ -8,9 +8,9 @@ const $ = q => document.querySelector(q)
 const popup = $("#add-channel-popup");
 const form = $("#add-channel-form")
 
-const channelRegex = /^[A-Za-z0-9][A-Za-z0-9 _.&-]{5,39}$/;
+const channelRegex = /^[A-Za-z0-9 _.&-]{5,20}$/;
 const numberRegex = /^[^0](\d{0,4})$/;
-const logoRegex = /^http[s]*:\/\/.{8,}$/;
+const logoRegex = /^http[s]?:\/\/.{8,}$/;
 
 const nameError = $("#name-error")
 const numberError = $("#number-error")

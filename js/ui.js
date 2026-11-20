@@ -1,4 +1,5 @@
-import { updateBlacklist, updateFavorite } from "./update.js";
+import { getChannels } from "../services/api.js";
+import { updateBlacklist, updateFavorite, updateLastWatched } from "./update.js";
 
 
 const chansContainer = document.querySelector("#channels");
@@ -13,7 +14,7 @@ function showChannels(data){
 
     chansContainer.innerHTML = ""
     chansContainer.innerHTML = data.map(ch =>`
-        <tr data-id="${ch.id}" data-isfavorite=${ch.isFavorite} class="channel ${ch.isBlacklisted ? "hidden blacklist" : ""} border-b border-gray-900 px-1 chan-hover" >
+        <tr data-id="${ch.id}" data-watchedat=${ch.lastWatchedAt} data-watched=${!ch.lastWatchedAt ? 'false':"true"} data-isfavorite=${ch.isFavorite} class="channel ${ch.isBlacklisted ? "hidden blacklist" : ""} border-b border-gray-900 px-1 chan-hover" >
             <td>&nbsp; ${ch.channelNumber}</td><td><img src="${ch.logo}" alt="Channel Logo" class="w-12.75"></td>
             <td class="h-12.75 flex justify-between items-center">${ch.name}
                 <span class="w-17.5 flex justify-around items-center text-[17px]">
@@ -36,7 +37,7 @@ function showChannels(data){
         handleFavorites()
     }
     else if(lastMenu == "blacklist"){
-        handleBlacklist()
+        handleBlacklist();
     }
 
  
@@ -88,8 +89,6 @@ const sideBar = document.querySelector("#side-bar");
 function someClickEvents(){
     
     document.addEventListener("click", (e)=>{
-        // console.log(notFavorite)
-        // console.log(favorite)
         // --------------------------------- Reload
         if(e.target.classList.contains("fa-rotate-right")) location.reload();
         
@@ -99,7 +98,10 @@ function someClickEvents(){
             for(let ch of channels){
                 ch.classList.remove("active")
             }
-            e.target.closest(".channel").classList.add("active")
+            e.target.closest(".channel").classList.add("active");
+            const id = e.target.closest(".channel").dataset.id
+            updateLastWatched(id)
+
         }
         // --------------------------------- Hide/Show
         if(e.target.closest("#side-bar-btn")){
@@ -146,8 +148,6 @@ function someClickEvents(){
             const id = tr.dataset.id;
             let favIcon = e.target.closest("tr").querySelector(".fav-icon");
 
-            // console.log(e.target.closest(".channel"));
-
             if(!tr.closest(".blacklist")){
                 updateBlacklist(id, true);
                 tr.classList.add("hidden",  "blacklist");
@@ -172,7 +172,8 @@ function someClickEvents(){
         showFavirote(e)
         // ---------------------------------- Show Blacklist
         showBlacklist(e)
-
+        // ----------------------------------- Show Last Watched
+        showHistories(e)
     })
 }
 
@@ -210,7 +211,45 @@ function showBlacklist(event){
     handleBlacklist()
 }
 
+async function showHistories(event){
+    if(!event.target.closest("#histories")) return;
+    // const data = await getChannels()
+    // showChannels(data)
 
+    const channels = document.querySelectorAll(".channel");
+    const watched = [...document.querySelectorAll(".channel[data-watched='true']")];
+    console.log(watched.reverse())
+    console.log(watched)
+    channels.forEach(ch => ch.classList.add("hidden"))
+        // if(ch.dataset.watched != 'true'){
+            
+        // }
+    
+    console.log(watched.length);
+    console.log(watched[watched.length-1]);
+    console.log(watched[watched.length-1]);
+
+    if(watched.length > 5){
+
+        watched.sort((a,b)=> Number(b.dataset.watchedat) - Number(a.dataset.watchedat))
+        .slice(0, 5).forEach(w => w.classList.remove("hidden"))
+    }else{
+        watched.forEach(w => w.classList.remove("hidden"))
+    }
+
+    // if(watched.length > 5){
+    //     console.log(watched.length )
+    //     for(let x = 0; x < 5; x++){
+    //         watched[x].classList.remove("hidden");
+    //     }
+    // }else{
+    //     for(let ch of watched){
+    //     // if(ch.dataset.watched != 'true'){
+    //         ch.classList.remove("hidden");
+    //     // }
+    // }
+    // }
+}
 
 
 export {showChannels, showChannelInfo, someClickEvents}

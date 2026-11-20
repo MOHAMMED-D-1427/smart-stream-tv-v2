@@ -21,4 +21,16 @@ async function updateBlacklist(id, value){
     console.log("Updated");
 }
 
-export {updateFavorite, updateBlacklist}
+
+async function updateLastWatched(id){
+    const date = Date.now()
+    await fetch(`${URL}/${id}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({lastWatchedAt: date})
+    });
+
+    console.log("Updated:", id, "DATE:", date);
+}
+
+export {updateFavorite, updateBlacklist, updateLastWatched}

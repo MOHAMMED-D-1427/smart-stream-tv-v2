@@ -65,20 +65,18 @@ async function getChannels(){
 
 
 async function updateChannels(){
-    const res = await fetch(URL);
+    const res = await fetch("https://6af5eb63f6270fa08d68de84.mockapi.io/api/channels");
     const data = await res.json()
     for(let ch of data){
         await fetch(`${URL}/${ch.id}`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({isFavorite: false, isBlacklisted: false})
+            body: JSON.stringify({lastWatchedAt: null})
         });
     }
     console.log("Updated")
 }
-
-
-
+updateChannels()
 
 export {getChannels, updateChannels};
 

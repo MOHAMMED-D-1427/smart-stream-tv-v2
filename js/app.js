@@ -5,7 +5,6 @@ import { searchChannels } from "./search.js";
 import { showChannelInfo, showChannels, someClickEvents } from "./ui.js";
 import { addChannel } from "./add.js";
 
-// const channels = await getChannels();
 
 // console.log(channels)
 
@@ -21,10 +20,11 @@ showChannelInfo(await getChannels());
 
 someClickEvents();
 
-// ADD CHANNEL:START
 addChannel();
-// ADD CHANNEL:END
 
 // ============= delete
 
 deleteChannel()
+
+// =============
+// updateChannels()
