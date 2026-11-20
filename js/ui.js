@@ -28,7 +28,16 @@ function showChannels(data){
             </td>
         </tr>
     `).join("");
+    // =================== To remember the last channels menu
+    const lastMenu = localStorage.getItem("last-menu") || "main"
+    localStorage.setItem("last-menu", lastMenu);
 
+    if(lastMenu == "favorites"){
+        handleFavorites()
+    }
+    else if(lastMenu == "blacklist"){
+        handleBlacklist()
+    }
 
  
 }
@@ -168,10 +177,8 @@ function someClickEvents(){
 }
 
 
-
-function showFavirote(event){
-    if(!event.target.closest("#favorites")) return;
-    const channels = document.querySelectorAll(".channel")
+function handleFavorites(){
+    const channels = document.querySelectorAll(".channel");
     for(let ch of channels){
         if(ch.dataset.isfavorite == "true"){
             ch.classList.remove("hidden");
@@ -179,11 +186,14 @@ function showFavirote(event){
             ch.classList.add("hidden");
         }
     }
+} 
+function showFavirote(event){
+    if(!event.target.closest("#favorites")) return;
+    localStorage.setItem("last-menu", "favorites");
+    handleFavorites()
 }
 
-
-function showBlacklist(event){
-    if(!event.target.closest("#blacklist")) return;
+function handleBlacklist(){
     const channels = document.querySelectorAll(".channel")
     for(let ch of channels){
         if(!ch.closest(".blacklist")){
@@ -193,6 +203,11 @@ function showBlacklist(event){
             ch.classList.remove("hidden");
         }
     }
+}
+function showBlacklist(event){
+    if(!event.target.closest("#blacklist")) return;
+    localStorage.setItem("last-menu", "blacklist");
+    handleBlacklist()
 }
 
 

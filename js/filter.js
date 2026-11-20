@@ -14,8 +14,9 @@ export function filterChannels(){
         filtered = channels.filter(ch => 
             ch.category.includes(e.target.value)
         )
-        // console.log(filtered)
+        localStorage.setItem("last-menu", "main");
         showChannels(filtered);
+
     })
 }
 

@@ -20,7 +20,7 @@ const rules = {
     "channel-name": {regex: channelRegex, error: nameError, msg: "Name must contain 5-39 letters."},
     "channel-number": {regex: numberRegex, error: numberError, msg: "Channel number must contain only 1-5 digits."},
     "channel-logo": {regex: logoRegex, error: logoError, msg: "Logo URL must be a valid HTTP or HTTPS URL."},
-}
+};
 
 const channel = {isFavorite: false, isBlacklisted: false,
     category: "DOCUMENTARY",
@@ -91,9 +91,8 @@ function addChannel(){
 }
 
 function validateAndCreate(){
-
     form.addEventListener("submit", async (e)=>{
-        e.preventDefault()
+    e.preventDefault()
     const inputs = document.querySelectorAll("#channel-name, #channel-number, #channel-logo");
     
     if(validateField(inputs[0]) && validateField(inputs[1]) && validateField(inputs[2])){
